@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Movie</title>
+	<link rel="stylesheet" href="https://acehow.com/css/artplayer.css" />
+	<script src="https://acehow.com/js/artplayer.js"></script>
+	<style>
+	
+	.artplayer-app {
+    width: 640px;
+    height: 480px;
+	}
+	</style>
+</head>
+<body>
+<input onclick="selmovie()" type="button" value="Play"><select id="selectlist"></select>
+<div class="artplayer-app" id="divplayer"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+var art;
+let liststr="";
+$.ajax({
+		type: "GET",
+		url: "/list",
+		async:false
+	}).done(function(msg) {
+		var fis=msg.toString().split(",");
+		for(i=0;i<fis.length;i++){
+			if(fis[i]!=""){
+				document.getElementById("selectlist").options.add(new Option(fis[i],fis[i]));
+			}
+		}
+	});
+	
+function selmovie(){
+	var m=document.getElementById("selectlist").value;
+	if(art!=null){
+		art.destroy();
+	}else{
+		 art = new Artplayer({
+    container: '.artplayer-app',
+    url: m,
+    volume: 0.5,
+    muted: false,
+    autoplay: false,
+    pip: true,
+    autoSize: true,
+    screenshot: true,
+    setting: true,
+    loop: false,
+    playbackRate: true,
+    aspectRatio: true,
+    fullscreen: true,
+    fullscreenWeb: true,
+    mutex: true,
+    theme: '#ffad00',
+    lang: 'zh-cn'
+});
+	}
+}
+
+
+</script>
+
+</body>
+</html>
