@@ -28,7 +28,12 @@ $.ajax({
 		var fis=msg.toString().split(",");
 		for(i=0;i<fis.length;i++){
 			if(fis[i]!=""){
-				document.getElementById("selectlist").options.add(new Option(fis[i],fis[i]));
+				var showtmp=fis[i];
+				var li=showtmp.lastIndexOf("/");
+				if(li>0){
+					showtmp=showtmp.substring(li);
+				}
+				document.getElementById("selectlist").options.add(new Option(showtmp,fis[i]));
 			}
 		}
 	});
