@@ -33,7 +33,15 @@ func main() {
 		ctx.WriteString(liststr)
 	})
 
-	app.Run(iris.Addr(":80"))
+	servePort:="80"
+	if len(os.Args) == 2 {
+		_,errport:=strconv.Atoi(os.Args[1])
+		if errport==nil {
+			servePort=os.Args[1]
+		}
+	}
+
+	app.Run(iris.Addr(":"+servePort))
 }
 
 func WalkDir(dirPth, suffix string) (files []string, err error) {
