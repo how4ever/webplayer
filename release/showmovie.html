@@ -31,7 +31,7 @@ $.ajax({
 				var showtmp=fis[i];
 				var li=showtmp.lastIndexOf("/");
 				if(li>0){
-					showtmp=showtmp.substring(li);
+					showtmp=showtmp.substring(li+1);
 				}
 				document.getElementById("selectlist").options.add(new Option(showtmp,fis[i]));
 			}
@@ -40,9 +40,9 @@ $.ajax({
 	
 function selmovie(){
 	var m=document.getElementById("selectlist").value;
-	if(art!=null){
+	if(typeof(art)!='undefined'){
 		art.destroy();
-	}else{
+	}
 		 art = new Artplayer({
     container: '.artplayer-app',
     url: m,
@@ -62,7 +62,7 @@ function selmovie(){
     theme: '#ffad00',
     lang: 'zh-cn'
 });
-	}
+	
 }
 
 
